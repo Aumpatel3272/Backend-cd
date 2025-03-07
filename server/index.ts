@@ -1,4 +1,6 @@
 import http from 'http'
+import dotenv from 'dotenv'
+dotenv.config({})
 import express from 'express'
 import cors from 'cors'
 import { Server, LobbyRoom } from 'colyseus'
@@ -8,11 +10,17 @@ import { RoomType } from '../types/Rooms'
 // import socialRoutes from "@colyseus/social/express"
 
 import { SkyOffice } from './rooms/SkyOffice'
-
 const port = Number(process.env.PORT || 2567)
 const app = express()
 
-app.use(cors())
+// app.use(cors())
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://virtual-desk.vercel.app"],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true, // Allow cookies if needed
+  })
+);
 app.use(express.json())
 // app.use(express.static('dist'))
 

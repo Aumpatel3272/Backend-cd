@@ -77,7 +77,16 @@ import { SkyOffice } from './rooms/SkyOffice'
 const port = Number(process.env.PORT || 3000)
 const app = express()
 
+app.use(
+     cors({
+      origin: ["http://localhost:5173", "https://virtual-desk.vercel.app"],
+      methods: "GET,POST,PUT,DELETE",
+      credentials: true, // Allow cookies if needed
+    })
+   );
+   
 app.use(express.json())
+
 
 app.get('/', (req, res) => {
   res.send('Hello from Node.js on Render!')
